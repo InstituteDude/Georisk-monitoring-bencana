@@ -1,0 +1,177 @@
+{
+  "type": "FeatureCollection",
+  "name": "Zona Rawan Gempa Bumi Kawasan Bandung",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sesar Lembang - Zona Utama",
+        "type": "EARTHQUAKE",
+        "riskLevel": "CRITICAL",
+        "description": "Zona patahan Lembang sepanjang 29 km yang masih aktif. Potensi gempa hingga M7.0. Merupakan ancaman utama bagi Kota Bandung.",
+        "area": 45.0,
+        "population": 350000,
+        "kelurahan": "Lembang",
+        "kecamatan": "Lembang",
+        "mitigation": "Penerapan standar bangunan tahan gempa, sosialisasi kesiapsiagaan, jalur evakuasi"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [107.5234, -6.7856],
+            [107.6234, -6.7789],
+            [107.6856, -6.7912],
+            [107.7123, -6.8034],
+            [107.7189, -6.8156],
+            [107.7145, -6.8289],
+            [107.6834, -6.8345],
+            [107.6234, -6.8312],
+            [107.5623, -6.8234],
+            [107.5234, -6.8123],
+            [107.5156, -6.7978],
+            [107.5234, -6.7856]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bandung Utara - Zona Amplifikasi",
+        "type": "EARTHQUAKE",
+        "riskLevel": "HIGH",
+        "description": "Wilayah Bandung Utara dengan potensi amplifikasi gelombang gempa akibat kondisi geologi cekungan.",
+        "area": 28.0,
+        "population": 180000,
+        "kelurahan": "Dago",
+        "kecamatan": "Coblong",
+        "mitigation": "Retrofitting bangunan tua, microzonation study, pengawasan konstruksi"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [107.5845, -6.8456],
+            [107.6312, -6.8412],
+            [107.6567, -6.8478],
+            [107.6723, -6.8567],
+            [107.6789, -6.8734],
+            [107.6712, -6.8912],
+            [107.6456, -6.8978],
+            [107.6123, -6.9012],
+            [107.5845, -6.8945],
+            [107.5689, -6.8789],
+            [107.5623, -6.8634],
+            [107.5734, -6.8512],
+            [107.5845, -6.8456]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bandung Tengah - Cekungan Aluvial",
+        "type": "EARTHQUAKE",
+        "riskLevel": "HIGH",
+        "description": "Pusat Kota Bandung dengan lapisan sedimen tebal yang dapat memperkuat getaran gempa (efek cekungan).",
+        "area": 22.0,
+        "population": 420000,
+        "kelurahan": "Braga",
+        "kecamatan": "Sumur Bandung",
+        "mitigation": "Audit struktur bangunan, penyiapan shelter, sistem peringatan dini"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [107.5912, -6.9034],
+            [107.6234, -6.9012],
+            [107.6512, -6.9078],
+            [107.6634, -6.9189],
+            [107.6678, -6.9345],
+            [107.6623, -6.9512],
+            [107.6412, -6.9578],
+            [107.6123, -6.9556],
+            [107.5912, -6.9478],
+            [107.5789, -6.9345],
+            [107.5756, -6.9189],
+            [107.5823, -6.9078],
+            [107.5912, -6.9034]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cimahi - Zona Transisi",
+        "type": "EARTHQUAKE",
+        "riskLevel": "MEDIUM",
+        "description": "Wilayah transisi antara dataran tinggi dan cekungan dengan risiko gempa menengah.",
+        "area": 18.0,
+        "population": 145000,
+        "kelurahan": "Cimahi Tengah",
+        "kecamatan": "Cimahi Tengah",
+        "mitigation": "Penguatan struktur, penyuluhan masyarakat, latihan evakuasi"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [107.5234, -6.8789],
+            [107.5512, -6.8756],
+            [107.5678, -6.8834],
+            [107.5756, -6.8978],
+            [107.5712, -6.9145],
+            [107.5567, -6.9256],
+            [107.5345, -6.9234],
+            [107.5189, -6.9123],
+            [107.5134, -6.8978],
+            [107.5167, -6.8856],
+            [107.5234, -6.8789]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bandung Selatan - Zona Vulkanik",
+        "type": "EARTHQUAKE",
+        "riskLevel": "MEDIUM",
+        "description": "Kawasan selatan Bandung dengan karakteristik tanah vulkanik yang relatif stabil namun tetap berisiko.",
+        "area": 15.0,
+        "population": 95000,
+        "kelurahan": "Margasari",
+        "kecamatan": "Margacinta",
+        "mitigation": "Monitoring aktivitas vulkanik, standar konstruksi, kesiapsiagaan"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [107.6123, -6.9623],
+            [107.6456, -6.9589],
+            [107.6678, -6.9678],
+            [107.6789, -6.9823],
+            [107.6734, -6.9989],
+            [107.6567, -7.0089],
+            [107.6312, -7.0056],
+            [107.6123, -6.9945],
+            [107.6034, -6.9812],
+            [107.6056, -6.9689],
+            [107.6123, -6.9623]
+          ]
+        ]
+      }
+    }
+  ]
+}

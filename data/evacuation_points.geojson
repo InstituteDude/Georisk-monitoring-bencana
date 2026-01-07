@@ -1,0 +1,146 @@
+{
+  "type": "FeatureCollection",
+  "name": "Titik Evakuasi Bencana Kota Bandung",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "GOR Saparua",
+        "address": "Jl. Saparua No. 1, Bandung",
+        "capacity": 5000,
+        "facilities": ["toilet", "dapur_umum", "pos_kesehatan", "tempat_ibadah"],
+        "phone": "(022) 7271234"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6123, -6.9034]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Stadion Si Jalak Harupat",
+        "address": "Jl. Stadion No. 1, Soreang",
+        "capacity": 15000,
+        "facilities": ["toilet", "dapur_umum", "pos_kesehatan", "parkir_luas", "tempat_ibadah"],
+        "phone": "(022) 5891234"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5212, -7.0234]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lapangan Gasibu",
+        "address": "Jl. Diponegoro, Bandung",
+        "capacity": 10000,
+        "facilities": ["toilet", "pos_kesehatan", "area_terbuka"],
+        "phone": "(022) 7201234"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6189, -6.9012]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "GOR Pajajaran",
+        "address": "Jl. Pajajaran No. 37, Bandung",
+        "capacity": 3000,
+        "facilities": ["toilet", "dapur_umum", "pos_kesehatan"],
+        "phone": "(022) 6031234"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5978, -6.8912]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Balai Kota Bandung",
+        "address": "Jl. Wastukencana No. 2, Bandung",
+        "capacity": 2000,
+        "facilities": ["toilet", "pos_kesehatan", "ruang_rapat"],
+        "phone": "(022) 4232338"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6067, -6.9167]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gedung Sate - Area Parkir",
+        "address": "Jl. Diponegoro No. 22, Bandung",
+        "capacity": 4000,
+        "facilities": ["toilet", "pos_kesehatan", "area_terbuka"],
+        "phone": "(022) 7272222"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6189, -6.9023]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "SMAN 3 Bandung",
+        "address": "Jl. Belitung No. 8, Bandung",
+        "capacity": 1500,
+        "facilities": ["toilet", "dapur_umum", "aula"],
+        "phone": "(022) 4231234"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6134, -6.9189]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Masjid Raya Bandung",
+        "address": "Jl. Dalem Kaum, Alun-alun Bandung",
+        "capacity": 8000,
+        "facilities": ["toilet", "tempat_ibadah", "dapur_umum"],
+        "phone": "(022) 4206567"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.6067, -6.9212]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Terminal Leuwipanjang",
+        "address": "Jl. Soekarno Hatta, Bandung",
+        "capacity": 5000,
+        "facilities": ["toilet", "parkir_luas", "akses_transportasi"],
+        "phone": "(022) 5201234"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5856, -6.9456]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lapangan Tegallega",
+        "address": "Jl. Peta, Bandung",
+        "capacity": 12000,
+        "facilities": ["toilet", "area_terbuka", "pos_kesehatan"],
+        "phone": "(022) 6011234"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [107.5912, -6.9345]
+      }
+    }
+  ]
+}

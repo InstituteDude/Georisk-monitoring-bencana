@@ -1,0 +1,204 @@
+{
+  "type": "FeatureCollection",
+  "name": "Zona Rawan Longsor Kawasan Bandung",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lembang - Lereng Tangkuban Parahu",
+        "type": "LANDSLIDE",
+        "riskLevel": "CRITICAL",
+        "description": "Kawasan lereng curam Gunung Tangkuban Parahu dengan kemiringan >40%. Kondisi tanah labil dan curah hujan tinggi meningkatkan risiko longsor.",
+        "area": 12.5,
+        "population": 45000,
+        "kelurahan": "Lembang",
+        "kecamatan": "Lembang",
+        "mitigation": "Pembatasan pembangunan, pembuatan terasering, penghijauan lereng"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [107.5978, -6.7623],
+            [107.6234, -6.7589],
+            [107.6445, -6.7678],
+            [107.6534, -6.7823],
+            [107.6489, -6.7989],
+            [107.6312, -6.8089],
+            [107.6089, -6.8056],
+            [107.5934, -6.7945],
+            [107.5878, -6.7812],
+            [107.5923, -6.7689],
+            [107.5978, -6.7623]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Dago Atas - Ciumbuleuit",
+        "type": "LANDSLIDE",
+        "riskLevel": "HIGH",
+        "description": "Kawasan perbukitan dengan kemiringan tinggi dan pemukiman padat. Rawan longsor terutama saat hujan lebat berkepanjangan.",
+        "area": 6.8,
+        "population": 32000,
+        "kelurahan": "Ciumbuleuit",
+        "kecamatan": "Cidadap",
+        "mitigation": "Pemasangan bronjong, drainase vertikal, relokasi zona merah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [107.5989, -6.8534],
+            [107.6145, -6.8512],
+            [107.6278, -6.8578],
+            [107.6334, -6.8689],
+            [107.6289, -6.8812],
+            [107.6156, -6.8889],
+            [107.6012, -6.8856],
+            [107.5912, -6.8756],
+            [107.5878, -6.8645],
+            [107.5923, -6.8567],
+            [107.5989, -6.8534]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Punclut - Ciburial",
+        "type": "LANDSLIDE",
+        "riskLevel": "HIGH",
+        "description": "Kawasan wisata dengan topografi berbukit dan tanah lempung yang mudah jenuh air.",
+        "area": 5.2,
+        "population": 18000,
+        "kelurahan": "Ciburial",
+        "kecamatan": "Cimenyan",
+        "mitigation": "Reboisasi, pembuatan talud, monitoring pergerakan tanah"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [107.6312, -6.8312],
+            [107.6489, -6.8289],
+            [107.6612, -6.8367],
+            [107.6678, -6.8489],
+            [107.6623, -6.8612],
+            [107.6489, -6.8689],
+            [107.6334, -6.8656],
+            [107.6234, -6.8545],
+            [107.6212, -6.8423],
+            [107.6267, -6.8345],
+            [107.6312, -6.8312]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cimahi Utara - Cisarua",
+        "type": "LANDSLIDE",
+        "riskLevel": "MEDIUM",
+        "description": "Kawasan perbukitan dengan potensi longsor sedang. Diperlukan kewaspadaan saat musim hujan.",
+        "area": 4.5,
+        "population": 22000,
+        "kelurahan": "Cisarua",
+        "kecamatan": "Cimahi Utara",
+        "mitigation": "Penghijauan, perbaikan drainase, penyuluhan masyarakat"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [107.5234, -6.8456],
+            [107.5412, -6.8434],
+            [107.5534, -6.8512],
+            [107.5589, -6.8634],
+            [107.5545, -6.8756],
+            [107.5412, -6.8834],
+            [107.5256, -6.8801],
+            [107.5156, -6.8689],
+            [107.5134, -6.8567],
+            [107.5178, -6.8489],
+            [107.5234, -6.8456]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Parongpong - Cihideung",
+        "type": "LANDSLIDE",
+        "riskLevel": "MEDIUM",
+        "description": "Kawasan pertanian di lereng dengan kemiringan sedang. Risiko meningkat saat pengolahan lahan tidak tepat.",
+        "area": 3.8,
+        "population": 15000,
+        "kelurahan": "Cihideung",
+        "kecamatan": "Parongpong",
+        "mitigation": "Teknik pertanian konservasi, penanaman vegetasi penahan longsor"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [107.5623, -6.7934],
+            [107.5789, -6.7912],
+            [107.5912, -6.7989],
+            [107.5967, -6.8112],
+            [107.5923, -6.8234],
+            [107.5789, -6.8312],
+            [107.5634, -6.8278],
+            [107.5534, -6.8167],
+            [107.5512, -6.8045],
+            [107.5556, -6.7967],
+            [107.5623, -6.7934]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cilengkrang - Manglayang",
+        "type": "LANDSLIDE",
+        "riskLevel": "MEDIUM",
+        "description": "Kawasan lereng Gunung Manglayang dengan potensi longsor tipe rayapan tanah.",
+        "area": 4.2,
+        "population": 12000,
+        "kelurahan": "Cilengkrang",
+        "kecamatan": "Cilengkrang",
+        "mitigation": "Vegetasi penahan, drainase permukaan, pemantauan rutin"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [107.7056, -6.8589],
+            [107.7234, -6.8567],
+            [107.7356, -6.8645],
+            [107.7412, -6.8767],
+            [107.7367, -6.8889],
+            [107.7234, -6.8967],
+            [107.7078, -6.8934],
+            [107.6978, -6.8823],
+            [107.6956, -6.8701],
+            [107.7001, -6.8623],
+            [107.7056, -6.8589]
+          ]
+        ]
+      }
+    }
+  ]
+}
