@@ -16,8 +16,10 @@ exports.AuthController = void 0;
 const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
+const client_1 = require("@prisma/client");
 const auth_service_1 = require("./auth.service");
 const dto_1 = require("./dto");
+const guards_1 = require("./guards");
 let AuthController = class AuthController {
     authService;
     constructor(authService) {
@@ -107,7 +109,8 @@ __decorate([
 ], AuthController.prototype, "getCurrentUser", null);
 __decorate([
     (0, common_1.Get)('users'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), guards_1.RolesGuard),
+    (0, guards_1.Roles)(client_1.Role.ADMIN),
     openapi.ApiResponse({ status: 200 }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -115,7 +118,8 @@ __decorate([
 ], AuthController.prototype, "getAllUsers", null);
 __decorate([
     (0, common_1.Patch)('users/:id/role'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), guards_1.RolesGuard),
+    (0, guards_1.Roles)(client_1.Role.ADMIN),
     openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),

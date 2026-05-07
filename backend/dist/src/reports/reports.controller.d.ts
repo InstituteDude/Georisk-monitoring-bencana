@@ -117,7 +117,7 @@ export declare class ReportsController {
         resolvedAt: Date | null;
         userId: string | null;
     }>;
-    create(dto: CreateReportDto): Promise<{
+    create(req: any, dto: CreateReportDto): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;

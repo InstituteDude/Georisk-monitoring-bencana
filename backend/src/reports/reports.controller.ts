@@ -8,11 +8,16 @@ import {
   Body,
   Param,
   Query,
+  UseGuards,
+  Request,
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { Role } from '@prisma/client';
 import { ReportsService } from './reports.service';
 import { CreateReportDto, UpdateReportDto, UpdateReportStatusDto, FilterReportDto } from './dto';
+import { RolesGuard, Roles } from '../auth/guards';
 
 @Controller('reports')
 export class ReportsController {
@@ -54,24 +59,32 @@ export class ReportsController {
   }
 
   @Post()
+  @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() dto: CreateReportDto) {
-    return this.reportsService.create(dto);
+  create(@Request() req: any, @Body() dto: CreateReportDto) {
+    return this.reportsService.create(dto, req.user?.id);
   }
 
   @Put(':id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
   update(@Param('id') id: string, @Body() dto: UpdateReportDto) {
     return this.reportsService.update(id, dto);
   }
 
   @Patch(':id/status')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
   updateStatus(@Param('id') id: string, @Body() dto: UpdateReportStatusDto) {
     return this.reportsService.updateStatus(id, dto);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: string) {
     return this.reportsService.remove(id);
   }
 }
+

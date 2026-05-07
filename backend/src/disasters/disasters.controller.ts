@@ -7,13 +7,16 @@ import {
   Body,
   Param,
   Query,
+  UseGuards,
   ParseEnumPipe,
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { DisasterType, Role } from '@prisma/client';
 import { DisastersService } from './disasters.service';
 import { CreateDisasterZoneDto, UpdateDisasterZoneDto, FilterDisasterZoneDto } from './dto';
-import { DisasterType } from '@prisma/client';
+import { RolesGuard, Roles } from '../auth/guards';
 
 @Controller('disasters')
 export class DisastersController {
@@ -55,19 +58,26 @@ export class DisastersController {
   }
 
   @Post()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.CREATED)
   create(@Body() dto: CreateDisasterZoneDto) {
     return this.disastersService.create(dto);
   }
 
   @Put(':id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
   update(@Param('id') id: string, @Body() dto: UpdateDisasterZoneDto) {
     return this.disastersService.update(id, dto);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: string) {
     return this.disastersService.remove(id);
   }
 }
+

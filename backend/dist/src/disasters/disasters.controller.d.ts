@@ -1,6 +1,6 @@
+import { DisasterType } from '@prisma/client';
 import { DisastersService } from './disasters.service';
 import { CreateDisasterZoneDto, UpdateDisasterZoneDto, FilterDisasterZoneDto } from './dto';
-import { DisasterType } from '@prisma/client';
 export declare class DisastersController {
     private readonly disastersService;
     constructor(disastersService: DisastersService);

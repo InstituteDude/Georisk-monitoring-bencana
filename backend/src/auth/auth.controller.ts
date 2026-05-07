@@ -11,8 +11,10 @@ import {
   Param,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { Role } from '@prisma/client';
 import { AuthService } from './auth.service';
 import { RegisterDto, LoginDto, UpdateProfileDto, ChangePasswordDto } from './dto';
+import { RolesGuard, Roles } from './guards';
 
 @Controller('auth')
 export class AuthController {
@@ -56,14 +58,16 @@ export class AuthController {
 
   // Admin: Get all users
   @Get('users')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
   getAllUsers() {
     return this.authService.getAllUsers();
   }
 
   // Admin: Update user role
   @Patch('users/:id/role')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
   updateUserRole(
     @Param('id') id: string,
     @Body() body: { role: 'USER' | 'ADMIN' }

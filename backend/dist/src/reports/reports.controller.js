@@ -15,8 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReportsController = void 0;
 const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
+const passport_1 = require("@nestjs/passport");
+const client_1 = require("@prisma/client");
 const reports_service_1 = require("./reports.service");
 const dto_1 = require("./dto");
+const guards_1 = require("../auth/guards");
 let ReportsController = class ReportsController {
     reportsService;
     constructor(reportsService) {
@@ -43,8 +46,8 @@ let ReportsController = class ReportsController {
     findOne(id) {
         return this.reportsService.findOne(id);
     }
-    create(dto) {
-        return this.reportsService.create(dto);
+    create(req, dto) {
+        return this.reportsService.create(dto, req.user?.id);
     }
     update(id, dto) {
         return this.reportsService.update(id, dto);
@@ -111,15 +114,19 @@ __decorate([
 ], ReportsController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dto_1.CreateReportDto]),
+    __metadata("design:paramtypes", [Object, dto_1.CreateReportDto]),
     __metadata("design:returntype", void 0)
 ], ReportsController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':id'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), guards_1.RolesGuard),
+    (0, guards_1.Roles)(client_1.Role.ADMIN),
     openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -129,6 +136,8 @@ __decorate([
 ], ReportsController.prototype, "update", null);
 __decorate([
     (0, common_1.Patch)(':id/status'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), guards_1.RolesGuard),
+    (0, guards_1.Roles)(client_1.Role.ADMIN),
     openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -138,6 +147,8 @@ __decorate([
 ], ReportsController.prototype, "updateStatus", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), guards_1.RolesGuard),
+    (0, guards_1.Roles)(client_1.Role.ADMIN),
     (0, common_1.HttpCode)(common_1.HttpStatus.NO_CONTENT),
     openapi.ApiResponse({ status: common_1.HttpStatus.NO_CONTENT }),
     __param(0, (0, common_1.Param)('id')),

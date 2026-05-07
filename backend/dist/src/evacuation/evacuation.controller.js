@@ -15,8 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EvacuationController = void 0;
 const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
+const passport_1 = require("@nestjs/passport");
+const client_1 = require("@prisma/client");
 const evacuation_service_1 = require("./evacuation.service");
 const dto_1 = require("./dto");
+const guards_1 = require("../auth/guards");
 let EvacuationController = class EvacuationController {
     evacuationService;
     constructor(evacuationService) {
@@ -78,6 +81,8 @@ __decorate([
 ], EvacuationController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), guards_1.RolesGuard),
+    (0, guards_1.Roles)(client_1.Role.ADMIN),
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
     __param(0, (0, common_1.Body)()),
@@ -87,6 +92,8 @@ __decorate([
 ], EvacuationController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':id'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), guards_1.RolesGuard),
+    (0, guards_1.Roles)(client_1.Role.ADMIN),
     openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -96,6 +103,8 @@ __decorate([
 ], EvacuationController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), guards_1.RolesGuard),
+    (0, guards_1.Roles)(client_1.Role.ADMIN),
     (0, common_1.HttpCode)(common_1.HttpStatus.NO_CONTENT),
     openapi.ApiResponse({ status: common_1.HttpStatus.NO_CONTENT }),
     __param(0, (0, common_1.Param)('id')),
