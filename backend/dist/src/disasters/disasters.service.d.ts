@@ -8,8 +8,6 @@ export declare class DisastersService {
         data: {
             id: string;
             name: string;
-            createdAt: Date;
-            updatedAt: Date;
             type: import("@prisma/client").$Enums.DisasterType;
             riskLevel: import("@prisma/client").$Enums.RiskLevel;
             description: string | null;
@@ -21,6 +19,8 @@ export declare class DisastersService {
             kecamatan: string | null;
             mitigation: string | null;
             lastUpdated: Date;
+            createdAt: Date;
+            updatedAt: Date;
         }[];
         meta: {
             total: number;
@@ -32,8 +32,6 @@ export declare class DisastersService {
     findOne(id: string): Promise<{
         id: string;
         name: string;
-        createdAt: Date;
-        updatedAt: Date;
         type: import("@prisma/client").$Enums.DisasterType;
         riskLevel: import("@prisma/client").$Enums.RiskLevel;
         description: string | null;
@@ -45,12 +43,12 @@ export declare class DisastersService {
         kecamatan: string | null;
         mitigation: string | null;
         lastUpdated: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     findByType(type: DisasterType): Promise<{
         id: string;
         name: string;
-        createdAt: Date;
-        updatedAt: Date;
         type: import("@prisma/client").$Enums.DisasterType;
         riskLevel: import("@prisma/client").$Enums.RiskLevel;
         description: string | null;
@@ -62,12 +60,12 @@ export declare class DisastersService {
         kecamatan: string | null;
         mitigation: string | null;
         lastUpdated: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }[]>;
     create(dto: CreateDisasterZoneDto): Promise<{
         id: string;
         name: string;
-        createdAt: Date;
-        updatedAt: Date;
         type: import("@prisma/client").$Enums.DisasterType;
         riskLevel: import("@prisma/client").$Enums.RiskLevel;
         description: string | null;
@@ -79,12 +77,12 @@ export declare class DisastersService {
         kecamatan: string | null;
         mitigation: string | null;
         lastUpdated: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     update(id: string, dto: UpdateDisasterZoneDto): Promise<{
         id: string;
         name: string;
-        createdAt: Date;
-        updatedAt: Date;
         type: import("@prisma/client").$Enums.DisasterType;
         riskLevel: import("@prisma/client").$Enums.RiskLevel;
         description: string | null;
@@ -96,12 +94,12 @@ export declare class DisastersService {
         kecamatan: string | null;
         mitigation: string | null;
         lastUpdated: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     remove(id: string): Promise<{
         id: string;
         name: string;
-        createdAt: Date;
-        updatedAt: Date;
         type: import("@prisma/client").$Enums.DisasterType;
         riskLevel: import("@prisma/client").$Enums.RiskLevel;
         description: string | null;
@@ -113,8 +111,15 @@ export declare class DisastersService {
         kecamatan: string | null;
         mitigation: string | null;
         lastUpdated: Date;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
-    getAsGeoJSON(type?: DisasterType): Promise<{
+    getAsGeoJSON(type?: DisasterType, bbox?: {
+        minLat: number;
+        maxLat: number;
+        minLng: number;
+        maxLng: number;
+    }): Promise<{
         type: string;
         features: {
             type: string;
@@ -140,4 +145,36 @@ export declare class DisastersService {
         byRiskLevel: Record<string, number>;
         totalAffectedPopulation: number;
     }>;
+    private static readonly SIMPLIFY_TOLERANCE;
+    private static readonly COORD_PRECISION;
+    private static readonly MIN_RING_AREA;
+    private pointSegDist;
+    private dpSimplify;
+    private simplifyRing;
+    private ringArea;
+    private simplifyGeometry;
+    private skorTotalToRiskLevel;
+    private resolveFeatureName;
+    private resolveRiskLevel;
+    private resolveArea;
+    analyzeGeoJSON(buffer: Buffer, defaultType?: string): Promise<{
+        fileName: string;
+        summary: {
+            totalFeatures: any;
+            byType: Record<string, number>;
+            byRiskLevel: Record<string, number>;
+            totalArea: number;
+            totalPopulation: number;
+            invalidGeometries: number;
+        };
+        preview: any;
+    }>;
+    private buildZoneData;
+    importGeoJSON(buffer: Buffer, defaultType?: DisasterType, clearExisting?: boolean): Promise<{
+        success: boolean;
+        count: number;
+        message: string;
+    }>;
+    importGeoJSONWithProgress(buffer: Buffer, defaultType: DisasterType | undefined, clearExisting: boolean, onProgress: (event: object) => void): Promise<void>;
+    private calculateCentroid;
 }

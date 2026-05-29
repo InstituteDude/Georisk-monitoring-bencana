@@ -7,12 +7,17 @@ import {
   Body,
   Param,
   Query,
+  Res,
   UseGuards,
   ParseEnumPipe,
   HttpCode,
   HttpStatus,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { AuthGuard } from '@nestjs/passport';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { DisasterType, Role } from '@prisma/client';
 import { DisastersService } from './disasters.service';
 import { CreateDisasterZoneDto, UpdateDisasterZoneDto, FilterDisasterZoneDto } from './dto';
@@ -36,8 +41,17 @@ export class DisastersController {
   }
 
   @Get('geojson')
-  getAsGeoJSON(@Query('type') type?: DisasterType) {
-    return this.disastersService.getAsGeoJSON(type);
+  getAsGeoJSON(
+    @Query('type') type?: DisasterType,
+    @Query('minLat') minLat?: string,
+    @Query('maxLat') maxLat?: string,
+    @Query('minLng') minLng?: string,
+    @Query('maxLng') maxLng?: string,
+  ) {
+    const bbox = minLat && maxLat && minLng && maxLng
+      ? { minLat: +minLat, maxLat: +maxLat, minLng: +minLng, maxLng: +maxLng }
+      : undefined;
+    return this.disastersService.getAsGeoJSON(type, bbox);
   }
 
   @Get('statistics')
@@ -63,6 +77,65 @@ export class DisastersController {
   @HttpCode(HttpStatus.CREATED)
   create(@Body() dto: CreateDisasterZoneDto) {
     return this.disastersService.create(dto);
+  }
+
+  @Post('analyze')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
+  @UseInterceptors(FileInterceptor('file', { limits: { fileSize: 300 * 1024 * 1024 } }))
+  analyze(
+    @UploadedFile() file: Express.Multer.File,
+    @Body('defaultType') defaultType?: string,
+  ) {
+    return this.disastersService.analyzeGeoJSON(file.buffer, defaultType);
+  }
+
+  @Post('import')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
+  @UseInterceptors(FileInterceptor('file', { limits: { fileSize: 300 * 1024 * 1024 } }))
+  import(
+    @UploadedFile() file: Express.Multer.File,
+    @Body('type') type?: DisasterType,
+    @Body('clearExisting') clearExisting?: string,
+  ) {
+    return this.disastersService.importGeoJSON(
+      file.buffer,
+      type,
+      clearExisting === 'true',
+    );
+  }
+
+  @Post('import-stream')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
+  @UseInterceptors(FileInterceptor('file', { limits: { fileSize: 300 * 1024 * 1024 } }))
+  async importStream(
+    @UploadedFile() file: Express.Multer.File,
+    @Body('type') type: DisasterType,
+    @Body('clearExisting') clearExisting: string,
+    @Res() res: Response,
+  ) {
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+    res.setHeader('X-Accel-Buffering', 'no');
+    res.flushHeaders();
+
+    const send = (data: object) => res.write(`data: ${JSON.stringify(data)}\n\n`);
+
+    try {
+      await this.disastersService.importGeoJSONWithProgress(
+        file.buffer,
+        type,
+        clearExisting === 'true',
+        send,
+      );
+    } catch {
+      // error already sent inside the service
+    } finally {
+      res.end();
+    }
   }
 
   @Put(':id')

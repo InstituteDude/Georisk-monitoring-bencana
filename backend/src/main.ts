@@ -2,9 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { NestExpressApplication } from '@nestjs/platform-express';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const compression = require('compression');
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  // Gzip all responses — critical for large GeoJSON payloads
+  app.use(compression());
 
   // Enable CORS for frontend
   const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
@@ -44,6 +50,9 @@ async function bootstrap() {
   
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
+
+  // Allow large GeoJSON imports (up to 300MB) with extended timeout
+  app.getHttpServer().setTimeout(300_000); // 5 minutes
 
   const port = process.env.PORT || 3001;
   await app.listen(port);

@@ -16,6 +16,7 @@ exports.DisastersController = void 0;
 const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
+const platform_express_1 = require("@nestjs/platform-express");
 const client_1 = require("@prisma/client");
 const disasters_service_1 = require("./disasters.service");
 const dto_1 = require("./dto");
@@ -34,8 +35,11 @@ let DisastersController = class DisastersController {
         }
         return this.disastersService.identify(parseFloat(lat), parseFloat(lng));
     }
-    getAsGeoJSON(type) {
-        return this.disastersService.getAsGeoJSON(type);
+    getAsGeoJSON(type, minLat, maxLat, minLng, maxLng) {
+        const bbox = minLat && maxLat && minLng && maxLng
+            ? { minLat: +minLat, maxLat: +maxLat, minLng: +minLng, maxLng: +maxLng }
+            : undefined;
+        return this.disastersService.getAsGeoJSON(type, bbox);
     }
     getStatistics() {
         return this.disastersService.getStatistics();
@@ -48,6 +52,28 @@ let DisastersController = class DisastersController {
     }
     create(dto) {
         return this.disastersService.create(dto);
+    }
+    analyze(file, defaultType) {
+        return this.disastersService.analyzeGeoJSON(file.buffer, defaultType);
+    }
+    import(file, type, clearExisting) {
+        return this.disastersService.importGeoJSON(file.buffer, type, clearExisting === 'true');
+    }
+    async importStream(file, type, clearExisting, res) {
+        res.setHeader('Content-Type', 'text/event-stream');
+        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Connection', 'keep-alive');
+        res.setHeader('X-Accel-Buffering', 'no');
+        res.flushHeaders();
+        const send = (data) => res.write(`data: ${JSON.stringify(data)}\n\n`);
+        try {
+            await this.disastersService.importGeoJSONWithProgress(file.buffer, type, clearExisting === 'true', send);
+        }
+        catch {
+        }
+        finally {
+            res.end();
+        }
     }
     update(id, dto) {
         return this.disastersService.update(id, dto);
@@ -77,8 +103,12 @@ __decorate([
     (0, common_1.Get)('geojson'),
     openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Query)('type')),
+    __param(1, (0, common_1.Query)('minLat')),
+    __param(2, (0, common_1.Query)('maxLat')),
+    __param(3, (0, common_1.Query)('minLng')),
+    __param(4, (0, common_1.Query)('maxLng')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, String, String, String, String]),
     __metadata("design:returntype", void 0)
 ], DisastersController.prototype, "getAsGeoJSON", null);
 __decorate([
@@ -115,6 +145,45 @@ __decorate([
     __metadata("design:paramtypes", [dto_1.CreateDisasterZoneDto]),
     __metadata("design:returntype", void 0)
 ], DisastersController.prototype, "create", null);
+__decorate([
+    (0, common_1.Post)('analyze'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), guards_1.RolesGuard),
+    (0, guards_1.Roles)(client_1.Role.ADMIN),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', { limits: { fileSize: 300 * 1024 * 1024 } })),
+    openapi.ApiResponse({ status: 201 }),
+    __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Body)('defaultType')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", void 0)
+], DisastersController.prototype, "analyze", null);
+__decorate([
+    (0, common_1.Post)('import'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), guards_1.RolesGuard),
+    (0, guards_1.Roles)(client_1.Role.ADMIN),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', { limits: { fileSize: 300 * 1024 * 1024 } })),
+    openapi.ApiResponse({ status: 201 }),
+    __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Body)('type')),
+    __param(2, (0, common_1.Body)('clearExisting')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String, String]),
+    __metadata("design:returntype", void 0)
+], DisastersController.prototype, "import", null);
+__decorate([
+    (0, common_1.Post)('import-stream'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), guards_1.RolesGuard),
+    (0, guards_1.Roles)(client_1.Role.ADMIN),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', { limits: { fileSize: 300 * 1024 * 1024 } })),
+    openapi.ApiResponse({ status: 201 }),
+    __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Body)('type')),
+    __param(2, (0, common_1.Body)('clearExisting')),
+    __param(3, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String, String, Object]),
+    __metadata("design:returntype", Promise)
+], DisastersController.prototype, "importStream", null);
 __decorate([
     (0, common_1.Put)(':id'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), guards_1.RolesGuard),

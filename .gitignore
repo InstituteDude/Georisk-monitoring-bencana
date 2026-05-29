@@ -22,3 +22,6 @@ Thumbs.db
 
 # Generated
 *.tsbuildinfo
+
+# Large data files (exceeds GitHub 100MB limit)
+Data Json/
